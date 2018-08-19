@@ -1695,6 +1695,7 @@ void *udp_server_thread(void *dummy)
 				}
 			} else if (errno!=EINTR) {
 				if (++da_udp_errs<=UDP_MAX_ERRS) {
+					log_error("da_udp_errs now is: %s", da_udp_errs);
 					log_error("error in UDP recv: %s", strerror(errno));
 				}
 			}
@@ -2050,6 +2051,7 @@ void *tcp_server_thread(void *p)
 
 	if (listen(sock,5)) {
 		if (++da_tcp_errs<=TCP_MAX_ERRS) {
+			log_error("da_tcp_errs now is: %s", da_tcp_errs);
 			log_error("Could not listen on tcp socket: %s",strerror(errno));
 		}
 		goto close_sock_return;
